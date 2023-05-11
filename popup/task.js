@@ -1,4 +1,4 @@
-setTimeout(showModal,1000)
+showModal()
 
 const close = document.querySelector('.modal__close')
 
@@ -12,10 +12,20 @@ function closeHandler(event){
 
 function showModal(){
     const modal = document.querySelector('.modal')
-    if(!localStorage.getItem('check')){
+    if(!getCookie('check')){
         modal.classList.add('modal_active')
-        localStorage.setItem('check', '1')
+        setCookie('check', '11')
     }
    
 }
 
+function getCookie(name){
+    const pairs = document.cookie.split('; ')
+    const cookie = pairs.find(p => p.startsWith(name + '='))
+    if(!cookie) return
+    return cookie.substr(name.length + 1)
+}
+
+function setCookie(name, value) {
+    document.cookie = name + '=' + encodeURIComponent(value)
+}
